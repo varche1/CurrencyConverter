@@ -21,7 +21,7 @@ class CurrencyList extends Component {
             <ListItem
               text={item}
               selected={item === TEMP_CURRENT_CURRENCY}
-              onPress={this.onPress}
+              onPress={this.handlePress}
             />
           )}
           keyExtractor={item => item}
