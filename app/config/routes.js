@@ -1,5 +1,5 @@
-import { StackNavigator } from 'react-navigation';
 import { StatusBar } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 
 import Home from '../screens/Home';
 import CurrencyList from '../screens/CurrencyList';
@@ -12,6 +12,7 @@ const HomeStack = StackNavigator(
       screen: Home,
       navigationOptions: {
         header: () => null,
+        headerTitle: 'Home',
       },
     },
     Options: {
@@ -27,7 +28,9 @@ const HomeStack = StackNavigator(
       },
     },
   },
-  { headerMode: 'screen' },
+  {
+    headerMode: 'screen',
+  },
 );
 
 const CurrencyListStack = StackNavigator({
@@ -50,7 +53,7 @@ export default StackNavigator(
   },
   {
     mode: 'modal',
-    cardStyle: { paddingTop: StatusBar.currentHeight },
     headerMode: 'none',
+    cardStyle: { paddingTop: StatusBar.currentHeight },
   },
 );

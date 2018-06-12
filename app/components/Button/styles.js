@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-const styles = EStyleSheet.create({
+export default EStyleSheet.create({
   container: {
     alignItems: 'center',
   },
@@ -15,9 +15,7 @@ const styles = EStyleSheet.create({
   text: {
     color: '$white',
     fontSize: 14,
-    fontWeight: '300',
     paddingVertical: 20,
+    fontWeight: '300',
   },
 });
-
-export default styles;

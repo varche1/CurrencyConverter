@@ -1,38 +1,38 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { StatusBar, KeyboardAvoidingView } from 'react-native';
-import PropTypes from 'prop-types';
 
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
-import { ClearButton } from '../components/Buttons';
+import { ClearButton } from '../components/Button';
 import { LastConverted } from '../components/Text';
 import { Header } from '../components/Header';
 
-import { swapCurrency, changeCurrencyAmount } from '../actions/currencies';
+import { changeCurrencyAmount, swapCurrency } from '../actions/currencies';
 
 const TEMP_BASE_CURRENCY = 'USD';
 const TEMP_QUOTE_CURRENCY = 'GBP';
 const TEMP_BASE_PRICE = '100';
 const TEMP_QUOTE_PRICE = '79.74';
-const TEMP_CONVERSION_RATE = 0.7974;
-const TEMP_CONVERSION_DATE = new Date();
+const TEMP_LAST_CONVERTED = new Date();
+const TEMP_CONVERSION_RATE = 0.79739;
 
 class Home extends Component {
   static propTypes = {
     navigation: PropTypes.object,
   };
 
-  handePressBaseCurrency = () => {
+  handleChangeText = (amount) => {
+    console.log(changeCurrencyAmount(amount));
+  };
+
+  handlePressBaseCurrency = () => {
     this.props.navigation.navigate('CurrencyList', { title: 'Base Currency' });
   };
 
-  handePressQuoteCurrency = () => {
+  handlePressQuoteCurrency = () => {
     this.props.navigation.navigate('CurrencyList', { title: 'Quote Currency' });
-  };
-
-  handleTextChange = (amount) => {
-    console.log(changeCurrencyAmount(amount));
   };
 
   handleSwapCurrency = () => {
@@ -46,30 +46,30 @@ class Home extends Component {
   render() {
     return (
       <Container>
-        <StatusBar translucent={false} barStyle="light-content" />
+        <StatusBar backgroundColor="blue" barStyle="light-content" />
         <Header onPress={this.handleOptionsPress} />
         <KeyboardAvoidingView behavior="padding">
           <Logo />
           <InputWithButton
             buttonText={TEMP_BASE_CURRENCY}
-            onPress={this.handePressBaseCurrency}
+            onPress={this.handlePressBaseCurrency}
             defaultValue={TEMP_BASE_PRICE}
             keyboardType="numeric"
-            onChangeText={this.handleTextChange}
+            onChangeText={this.handleChangeText}
           />
           <InputWithButton
-            buttonText={TEMP_QUOTE_CURRENCY}
-            onPress={this.handePressQuoteCurrency}
             editable={false}
+            buttonText={TEMP_QUOTE_CURRENCY}
+            onPress={this.handlePressQuoteCurrency}
             value={TEMP_QUOTE_PRICE}
           />
           <LastConverted
+            date={TEMP_LAST_CONVERTED}
             base={TEMP_BASE_CURRENCY}
             quote={TEMP_QUOTE_CURRENCY}
             conversionRate={TEMP_CONVERSION_RATE}
-            date={TEMP_CONVERSION_DATE}
           />
-          <ClearButton text="Reverse Currencies" onPress={this.handleSwapCurrency} />
+          <ClearButton onPress={this.handleSwapCurrency} text="Reverse Currencies" />
         </KeyboardAvoidingView>
       </Container>
     );
